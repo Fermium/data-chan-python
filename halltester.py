@@ -31,18 +31,25 @@ def pop_measure(scan):
             dchan.datachan_clean_measure(measure)
     return d
 
-def set_current(scan,current):
+def set_current_lockin(scan,current):
     d = struct.pack('ff'*1, *[a-current/b,a+current/b])
     dchan.datachan_send_async_command(scan.device,0x01,d,len(d))
+def set_current_fixed(scan,current):
+    d = struct.pack('f'*1, *[current])
+    dchan.datachan_send_async_command(scan.device,0x02,d,len(d))
+
+def set_current_raw(scan,current):
+    d = struct.pack('B'*1, *[current])
+    dchan.datachan_send_async_command(scan.device,0x03,d,len(d))
 
 def set_heater_state(scan,power):
     d = struct.pack('B'*len([power]), *[power])
-    dchan.datachan_send_async_command(scan.device,0x02,d,len(d))
+    dchan.datachan_send_async_command(scan.device,0x04,d,len(d))
 
 def set_channel_gain(scan,channel,gain):
     d = struct.pack('BB'*1, *[channel,gain])
-    dchan.datachan_send_async_command(scan.device,0x03,d,len(d))
+    dchan.datachan_send_async_command(scan.device,0x05,d,len(d))
 
 def reset_device(scan):
     d = struct.pack('B'*len([0]), *[0])
-    dchan.datachan_send_async_command(scan.device,0x05,d,len(d))
+    dchan.datachan_send_async_command(scan.device,0x06,d,len(d))
