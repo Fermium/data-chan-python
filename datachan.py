@@ -1,5 +1,5 @@
 from cffi import FFI
-
+import copy
 ffi = FFI()
 ffi.cdef("""
 typedef struct {
@@ -28,7 +28,7 @@ typedef struct {
  bool datachan_is_initialized(void);
  void datachan_init(void);
  void datachan_shutdown(void);
- datachan_acquire_result_t datachan_device_acquire(void);
+ datachan_acquire_result_t datachan_device_acquire(uint16_t vid, uint16_t pid);
  void datachan_device_release(void* dev);
  bool datachan_device_enable(void* dev);
  bool datachan_device_is_enabled(void* dev);
@@ -42,10 +42,24 @@ typedef struct {
 """)
 
 dc = ffi.dlopen('./libDataChan.so')
+
+def init_lib():
+	return dc
 ################################################################################
-dc.datachan_init()
-scan = dc.datachan_device_acquire()
-if(scan.result==0xFF):
-    print("yeah")
-else :
-    print("nope")
+#dc.datachan_init()
+#scan = dc.datachan_device_acquire()
+#if(scan.result==0xFF):
+#    print("yeah")
+#else :
+#    print("nope")
+#values = []
+#dc.datachan_device_enable(scan.device)
+#for i in range(1,1000000) :
+#	a=dc.datachan_device_enqueued_measures(scan.device)
+#	print(a)
+#	if(dc.datachan_device_enqueued_measures(scan.device)):
+#		measure = dc.datachan_device_dequeue_measure(scan.device)
+#		if(measure!=ffi.NULL):
+#			values.append(measure)
+#		dc.datachan_clean_measure(measure)
+#values
