@@ -48,11 +48,11 @@ typedef struct {
 
 def init():
     if _platform == "linux" or _platform == "linux2":
-        dc = ffi.dlopen('data-chan-libs/libDataChan.so')
+        dc = ffi.dlopen('lib/libDataChan.so')
     elif _platform == "darwin":
-        dc = ffi.dlopen('data-chan-libs/libDataChan.dylib')
+        dc = ffi.dlopen('lib/libDataChan.dylib')
     elif _platform == "win32":
-        dc = ffi.dlopen('data-chan-libs/libDataChan.dll')
+        dc = ffi.dlopen('lib/libDataChan.dll')
     elif _platform == "win64":
-        dc = ffi.dlopen('data-chan-libs/libDataChan.dll')
+        dc = ffi.dlopen('lib/libDataChan.dll')
     return dc

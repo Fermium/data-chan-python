@@ -1,1 +1,1 @@
-include data-chan-libs/libDataChan.*
+include lib/libDataChan.*

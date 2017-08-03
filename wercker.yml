@@ -14,7 +14,7 @@ build:
       name: Download Data-chan executable
       code: |
         pip install -r data-chan/scripts/requirements.txt
-        (cd data-chan && python scripts/post-build-hook.py --bucket data-chan-libs --download ../data-chan-libs/)
+        (cd data-chan && python scripts/post-build-hook.py --bucket lib --download ../lib/)
     - script:
       name: Pack Python module
       code: |

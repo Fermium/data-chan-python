@@ -99,4 +99,4 @@ ENV/
 #Wercker
 .wercker
 
-data-chan-libs/libDataChan.*
+lib/libDataChan.*
