@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='data_chan',
-      version='0.1.10',
+      version='0.1.13',
       description='Python bindings for Data-Chan',
       long_description=readme(),
       url='https://github.com/fermiumlabs/data-chan-python/',
@@ -27,7 +27,6 @@ setup(name='data_chan',
           # Indicate who your project is intended for
           'Intended Audience :: Developers',
           'Intended Audience :: Science/Research',
-          'Topic: : Software Development :: Build Tools',
 
           # Pick your license as you wish (should match "license" above)
           'License :: OSI Approved :: Apache Software License',
