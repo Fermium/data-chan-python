@@ -1,0 +1,32 @@
+# docker box definition
+box: python
+
+# defining the dev pipeline
+build:
+  steps:
+    - install-packages:
+      packages: git build-essential python-pip python curl bash
+    - script:
+      name: Initialize git submodules
+      code: |
+        git submodule update --init --recursive
+    - script:
+      name: Download Data-chan executable
+      code: |
+        pip install -r data-chan/scripts/requirements.txt
+        (cd data-chan && python scripts/post-build-hook.py --bucket data-chan-libs --download ../data-chan-libs/)
+    - script:
+      name: Pack Python module
+      code: |
+        python setup.py sdist
+deploy:  
+  steps:
+    - script:
+      name: Install Twine
+      code: |
+        pip install twine
+    - script:
+      name: Deploy on PyPi
+      code: |
+        twine upload dist/$(ls -tp dist | grep -v /$ | head -1) || true
+        echo "The exit code has been forced to 0 to avoid error if version is already published"

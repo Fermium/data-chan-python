@@ -1,23 +1,27 @@
 from cffi import FFI
 import copy
+from sys import platform as _platform
+
+
 ffi = FFI()
+
 ffi.cdef("""
 typedef struct {
-	uint8_t type;
-	uint8_t mu;
+    uint8_t type;
+    uint8_t mu;
     uint8_t measuresNum;
-	uint8_t channels[8];
-	float values[8];
-	uint32_t time;
-	uint16_t millis;
+    uint8_t channels[8];
+    float values[8];
+    uint32_t time;
+    uint16_t millis;
 } measure_t;
  typedef enum {
-     uninitialized 				= 0x00,
-     not_found_or_inaccessible	= 0x01,
-     cannot_claim				= 0x02,
-     malloc_fail				= 0x03,
-     unknown					= 0x04,
-     success					= 0xFF,
+     uninitialized                 = 0x00,
+     not_found_or_inaccessible    = 0x01,
+     cannot_claim                = 0x02,
+     malloc_fail                = 0x03,
+     unknown                    = 0x04,
+     success                    = 0xFF,
  } search_result_t;
 
  typedef struct {
@@ -41,25 +45,14 @@ typedef struct {
  void datachan_device_set_config(void*, uint32_t, uint8_t, void*, uint16_t);
 """)
 
-dc = ffi.dlopen('./libDataChan.so')
 
-def init_lib():
-	return dc
-################################################################################
-#dc.datachan_init()
-#scan = dc.datachan_device_acquire()
-#if(scan.result==0xFF):
-#    print("yeah")
-#else :
-#    print("nope")
-#values = []
-#dc.datachan_device_enable(scan.device)
-#for i in range(1,1000000) :
-#	a=dc.datachan_device_enqueued_measures(scan.device)
-#	print(a)
-#	if(dc.datachan_device_enqueued_measures(scan.device)):
-#		measure = dc.datachan_device_dequeue_measure(scan.device)
-#		if(measure!=ffi.NULL):
-#			values.append(measure)
-#		dc.datachan_clean_measure(measure)
-#values
+def init():
+    if _platform == "linux" or _platform == "linux2":
+        dc = ffi.dlopen('data-chan-libs/libDataChan.so')
+    elif _platform == "darwin":
+        dc = ffi.dlopen('data-chan-libs/libDataChan.dylib')
+    elif _platform == "win32":
+        dc = ffi.dlopen('data-chan-libs/libDataChan.dll')
+    elif _platform == "win64":
+        dc = ffi.dlopen('data-chan-libs/libDataChan.dll')
+    return dc
