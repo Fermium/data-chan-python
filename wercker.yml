@@ -14,13 +14,17 @@ build:
       name: Download Data-chan executable
       code: |
         pip install -r data-chan/scripts/requirements.txt
-        (cd data-chan && python scripts/post-build-hook.py --bucket data-chan-js-binaries --download ../)
+        (cd data-chan && python scripts/post-build-hook.py --bucket data-chan-js-binaries --download ../data-chan-libs/)
     - script:
       name: Pack Python module
       code: |
         python setup.py sdist
 deploy:  
   steps:
+    - script:
+      name: Install Twine
+      code: |
+        pip install twine
     - script:
       name: Deploy on PyPi
       code: |
