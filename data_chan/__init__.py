@@ -2,7 +2,6 @@ from cffi import FFI
 import copy
 from sys import platform as _platform
 
-
 ffi = FFI()
 
 ffi.cdef("""

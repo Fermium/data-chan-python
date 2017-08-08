@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def readme():
@@ -14,7 +14,7 @@ setup(name='data_chan',
       author='Fermium LABS',
       author_email='info@fermiumlabs.com',
       license='Apache 2',
-      packages=['data_chan'],
+      packages=find_packages(),
       zip_safe=False,
       include_package_data=True,
       classifiers=[

@@ -21,6 +21,13 @@ build:
         python setup.py sdist
 deploy:  
   steps:
+    - install-packages:
+      packages: pandoc
+    - script:
+      name: Convert Readme from markdown to reStructuredText
+      code: |
+        pandoc README.md -o README.rst
+        rm README.md
     - script:
       name: Install Twine
       code: |
