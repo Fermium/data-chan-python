@@ -12,13 +12,6 @@ b = 1.0
 def init():
     """Initialize data-chan"""
     return dchan.datachan_init()
-    
-  'uninitialized' : 0x00,
-  'not_found_or_inaccessible' : 0x01,
-  'cannot_claim' : 0x02,
-  'malloc_fail' : 0x03,
-  'unknown' : 0x04,
-  'success' : 0xFF
 
 def acquire(vid,pid):
     """acquires a device given USB VID and PID"""
