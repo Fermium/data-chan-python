@@ -21,25 +21,25 @@ def acquire(vid,pid):
     if scan.result is 0xFF:
         return scan
     
-    else if scan.result is 0x04:
+    elif scan.result is 0x04:
       class DataChanDeviceUknownError(Exception):
         pass
       raise DataChanDeviceUknownError("Data-chan acquire returned 0x04, meaning the device is uknown")
     
-    else if scan.result is 0x03:
+    elif scan.result is 0x03:
       raise MemoryError("Data-chan acquire returned 0x03, meaning it failed to malloc()")
     
-    else if scan is 0x02:
+    elif scan is 0x02:
       class DataChanDeviceCannotClaimError(Exception):
         pass
       raise DataChanDeviceCannotClaimError("Data-chan acquire returned 0x02, meaning it could not claim the device, but found it")
     
-    else if scan.result is 0x01:
+    elif scan.result is 0x01:
       class DataChanDeviceNotFoundOrInaccessibleError(Exception):
         pass
       raise DataChanDeviceNotFoundOrInaccessibleError("Data-chan acquire returned 0x01, meaning it did not found the device of given VID/PID. Could also be a permission problem on Unix/Linux ")  
     
-    else if scan.result is 0x00:
+    elif scan.result is 0x00:
       class DataChanUninitializedError(Exception):
         pass
       raise DataChanUninitializedError("Data-chan was not initialized.")  
