@@ -81,7 +81,7 @@ def set_current_fixed(scan,current):
 
 def set_current_raw(scan,current):
     """set the current generator in CC mode given the raw DAC value. To be used only for testing"""
-    d = struct.pack('H'*1, *[float(current)])
+    d = struct.pack('H'*1, *[int(current)])
     dchan.datachan_send_async_command(scan.device,0x03,d,len(d))
 
 def set_heater_state(scan,power):
