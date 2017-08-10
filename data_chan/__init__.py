@@ -46,12 +46,13 @@ typedef struct {
 
 
 def init():
+    module_root_folder = os.path.abspath(os.path.dirname(__file__))
     if _platform == "linux" or _platform == "linux2":
-        dc = ffi.dlopen('lib/libDataChan.so')
+        dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.so'))
     elif _platform == "darwin":
-        dc = ffi.dlopen('lib/libDataChan.dylib')
+        dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dylib'))
     elif _platform == "win32":
-        dc = ffi.dlopen('lib/libDataChan.dll')
+        dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
     elif _platform == "win64":
-        dc = ffi.dlopen('lib/libDataChan.dll')
+        dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
     return dc
