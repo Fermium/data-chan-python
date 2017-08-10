@@ -1,5 +1,6 @@
 import data_chan
 import struct
+from cffi import FFI
 dchan = data_chan.init()
 
 # the current correction values can be specified
