@@ -1,6 +1,8 @@
 from cffi import FFI
 import copy
 from sys import platform as _platform
+import os
+
 
 ffi = FFI()
 
