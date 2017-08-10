@@ -10,6 +10,8 @@ dchan = data_chan.init()
 a = 0.0
 b = 1.0
 
+ffi = FFI()
+
 def init():
     """Initialize data-chan"""
     return dchan.datachan_init()
