@@ -101,7 +101,7 @@ def reset_device(scan):
     d = struct.pack('B'*len([0]), *[0])
     dchan.datachan_send_async_command(scan.device,0x06,d,len(d))
 
-def disconnect_devide(scan):
+def disconnect_device(scan):
     """disconnect the device and releases it from data-chan's usb control"""
     dchan.datachan_device_release(scan.device)
 
