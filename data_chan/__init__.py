@@ -58,6 +58,3 @@ def init():
     elif _platform == "win64":
         dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
     return dc
-
-def deinit(dc):
-    return ffi.dlclose(dc)

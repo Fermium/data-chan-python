@@ -16,10 +16,6 @@ def init():
     """Initialize data-chan"""
     return dchan.datachan_init()
 
-def deinit():
-    """De-initializes data-chan by closing the dynamic library"""
-    return data_chan.deinit(dchan)
-
 def acquire(vid,pid):
     """acquires a device given USB VID and PID"""
 
@@ -97,7 +93,7 @@ def set_heater_state(scan,power):
 
 def set_channel_gain(scan,channel,gain):
     """set the gain for the specified channel"""
-    d = struct.pack('BB', channel,int(gain))
+    d = struct.pack('<2B'*1, *[channel,int(gain)])
     dchan.datachan_send_async_command(scan.device,0x05,d,len(d))
 
 def reset_device(scan):
