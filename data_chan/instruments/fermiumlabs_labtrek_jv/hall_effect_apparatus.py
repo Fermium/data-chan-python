@@ -88,7 +88,7 @@ def set_heater_state(scan,power):
     """set the heater given an input value from 0 to 255"""
     if int(power) < 0 or int(power) > 255:
         raise ValueError("The heater power needs to be between 0 and 255")
-    d = struct.pack('B'*1), *[int(power)])
+    d = struct.pack('B'*1, *[int(power)])
     dchan.datachan_send_async_command(scan.device,0x04,d,len(d))
 
 def set_channel_gain(scan,channel,gain):
