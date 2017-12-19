@@ -86,14 +86,14 @@ def set_current_raw(scan,current):
 
 def set_heater_state(scan,power):
     """set the heater given an input value from 0 to 255"""
-    if int(power) < 0 or int(power) > 255:
-        raise ValueError("The heater power needs to be between 0 and 255")
-    d = struct.pack('B'*1, *[int(power)])
+    #if int(power) < 0 or int(power) > 255:
+    #    raise ValueError("The heater power needs to be between 0 and 255")
+    d = struct.pack('B'*1, *[power])
     dchan.datachan_send_async_command(scan.device,0x04,d,len(d))
 
 def set_channel_gain(scan,channel,gain):
     """set the gain for the specified channel"""
-    d = struct.pack('BB'*1, *[channel,int(gain)])
+    d = struct.pack('<2B'*1, *[channel,int(gain)])
     dchan.datachan_send_async_command(scan.device,0x05,d,len(d))
 
 def reset_device(scan):
