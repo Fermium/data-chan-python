@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='data_chan',
-      version='0.2.0',
+      version='0.2.1',
       description='Python bindings for Data-Chan',
       long_description=readme(),
       url='https://github.com/fermiumlabs/data-chan-python/',
