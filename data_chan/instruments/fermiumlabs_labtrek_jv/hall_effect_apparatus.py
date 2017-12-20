@@ -18,38 +18,38 @@ def init():
 
 def acquire(vid,pid):
     """acquires a device given USB VID and PID"""
-
+    
     scan = dchan.datachan_device_acquire(vid,pid)
-
+    
     if scan.result is 0xFF:
         return scan
-
+    
     elif scan.result is 0x04:
       class DataChanDeviceUknownError(Exception):
         pass
       raise DataChanDeviceUknownError("Data-chan acquire returned 0x04, meaning the device is uknown")
-
+    
     elif scan.result is 0x03:
       raise MemoryError("Data-chan acquire returned 0x03, meaning it failed to malloc()")
-
+    
     elif scan is 0x02:
       class DataChanDeviceCannotClaimError(Exception):
         pass
       raise DataChanDeviceCannotClaimError("Data-chan acquire returned 0x02, meaning it could not claim the device, but found it")
-
+    
     elif scan.result is 0x01:
       class DataChanDeviceNotFoundOrInaccessibleError(Exception):
         pass
-      raise DataChanDeviceNotFoundOrInaccessibleError("Data-chan acquire returned 0x01, meaning it did not found the device of given VID/PID. Could also be a permission problem on Unix/Linux ")
-
+      raise DataChanDeviceNotFoundOrInaccessibleError("Data-chan acquire returned 0x01, meaning it did not found the device of given VID/PID. Could also be a permission problem on Unix/Linux ")  
+    
     elif scan.result is 0x00:
       class DataChanUninitializedError(Exception):
         pass
-      raise DataChanUninitializedError("Data-chan was not initialized.")
-
+      raise DataChanUninitializedError("Data-chan was not initialized.")  
+    
     else:
       return scan
-
+      
 def enable(scan):
     """enable measurements in the data-chan device"""
     return dchan.datachan_device_enable(scan.device)
@@ -98,7 +98,7 @@ def set_channel_gain(scan,channel,gain):
 
 def reset_device(scan):
     """reset the device"""
-    d = struct.pack('B'*1, *[0])
+    d = struct.pack('B'*len([0]), *[0])
     dchan.datachan_send_async_command(scan.device,0x06,d,len(d))
 
 def disconnect_device(scan):
