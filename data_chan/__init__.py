@@ -49,12 +49,12 @@ class Datachan:
         """)
         
         module_root_folder = os.path.abspath(os.path.dirname(__file__))
-        
+
         if _platform == "linux" or _platform == "linux2":
-            self.dl = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.so'))
+            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.so'))
         elif _platform == "darwin":
-            self.dl = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dylib'))
+            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dylib'))
         elif _platform == "win32":
-            self.dl = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
+            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
         elif _platform == "win64":
-            self.dl = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
+            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
