@@ -3,7 +3,7 @@ import struct
 
 class HallEffectApparatus:
 
-    def __init__(self):W
+    def __init__(self):
         self.dchan = data_chan.Datachan()
         """Initialize data-chan"""
         self.dchan.dl.datachan_init()
@@ -42,6 +42,8 @@ class HallEffectApparatus:
             class DataChanUknownError(Exception):
                 pass
             raise DataChanUknownError("Data chan returned an uknown code") 
+        
+
 
     def enable(self):
         """enable measurements in the data-chan device"""
