@@ -6,9 +6,9 @@ import os
 class Datachan:
     def __init__(self):
 
-        ffi = FFI()
+        self.ffi = FFI()
 
-        ffi.cdef("""
+        self.ffi.cdef("""
         typedef struct {
             uint8_t type;
             uint8_t mu;
@@ -51,10 +51,10 @@ class Datachan:
         module_root_folder = os.path.abspath(os.path.dirname(__file__))
 
         if _platform == "linux" or _platform == "linux2":
-            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.so'))
+            self.dl = self.ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.so'))
         elif _platform == "darwin":
-            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dylib'))
+            self.dl = self.ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dylib'))
         elif _platform == "win32":
-            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
+            self.dl = self.ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
         elif _platform == "win64":
-            self.dc = ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))
+            self.dl = self.ffi.dlopen(os.path.join(module_root_folder + "/" + 'lib/libDataChan.dll'))

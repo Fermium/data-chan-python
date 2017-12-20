@@ -56,9 +56,9 @@ class HallEffectApparatus:
     def pop_measure(self):
         """pop and returns one measure"""
         d = None
-        if(queue_size()):
-            measure = dchan.datachan_device_dequeue_measure(self.scan.device)
-            if(measure != ffi.NULL):
+        if(self.queue_size()):
+            measure = self.dchan.dl.datachan_device_dequeue_measure(self.scan.device)
+            if(measure != self.dchan.ffi.NULL):
                 d = { 'ch'+str(measure.channels[i]) : measure.values[i] for i in range(len(measure.channels)) }
                 d['time']=measure.time*1000+measure.millis
                 self.dchan.dl.datachan_clean_measure(measure)
